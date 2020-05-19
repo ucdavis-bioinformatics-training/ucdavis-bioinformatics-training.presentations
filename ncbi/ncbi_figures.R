@@ -1,4 +1,4 @@
-
+##### GENBANK
 tb <- read.table("genbank_data.txt",header=T,as.is=T)
 
 tb$Date2 = as.Date(paste("1-",tolower(tb$Date),sep=""),"%d-%b-%y")
@@ -25,9 +25,10 @@ pdf("sra.data.pdf",width=10,height=5,pointsize=10)
 sra <- read.table("sra_stat.csv",header=T,as.is=T,sep=",")
 sra$date2 <- as.Date(sra$date,"%m/%d/%Y")
 
+########## SRA Figure
 pdf("SRA.data.pdf",width=6,height=5,pointsize=10)
 
-plot(x=sra$date2,y=sra$bases,log="y", type='l', col=c("blue"), yaxt="n",xaxt = "n",ylab="",xlab="Year", main= "Sequence Read Archive")
+plot(x=sra$date2,y=sra$bases,log="y", type='l', col=c("blue"), yaxt="n",xaxt = "n",ylab="",xlab="Year", main= "Growth of Sequence Read Archive over time")
 aty <- axTicks(2)
 lines(x=sra$date2,y=sra$open_access_bases,type='l',col=c("red"))
 
@@ -41,6 +42,7 @@ legend("bottomright",c("Bases", "Open access bases"),pch=21,pt.bg="white",lty=1,
 dev.off()
 
 
+################ Gold DB
 gold <- read.table("goldData.txt",sep="\t",header=T,as.is=T, quote="",comment.char="")
 
 

@@ -1,13 +1,13 @@
 
-tb <- read.table("genbank_data.txt",header=T,as.is=T)
+tb <- read.table("genbank_data.txt",header=T,as.is=T, fill=T)
 
 tb$Date2 = as.Date(paste("1-",tolower(tb$Date),sep=""),"%d-%b-%y")
 
 pdf("GenBank.data.pdf",width=10,height=5,pointsize=10)
 par(mfrow=c(1,2))
-plot(x=tb$Date2,y=tb$GenBank.bases,log="y", type='l', col=c("blue"), yaxt="n",xaxt = "n",ylab="Bases",xlab="Year")
+plot(x=tb$Date2,y=tb$Genbank.Bases,log="y", type='l', col=c("blue"), yaxt="n",xaxt = "n",ylab="Bases",xlab="Year")
 aty <- axTicks(2)
-lines(x=tb$Date2,y=tb$WGS.bases,type='l',col=c("red"))
+lines(x=tb$Date2,y=tb$WGS.Bases,type='l',col=c("red"))
 
 axis.Date(side = 1, tb$Date2, format = "%Y")
 labels <- sapply(log10(aty),function(i)
@@ -17,9 +17,9 @@ axis(2,at=aty,labels=labels)
 grid(lty=1) 
 legend("bottomright",c("GenBank","WGS"),pch=21,pt.bg="white",lty=1,col=c("blue","red"))
 
-plot(x=tb$Date2,y=tb$GenBank.sequences,log="y", type='l', col=c("blue"), yaxt="n",xaxt = "n",ylab="Sequences",xlab="Year")
+plot(x=tb$Date2,y=tb$Genbank.Sequences,log="y", type='l', col=c("blue"), yaxt="n",xaxt = "n",ylab="Sequences",xlab="Year")
 aty <- axTicks(2)
-lines(x=tb$Date2,y=tb$WGS.sequences,type='l',col=c("red"))
+lines(x=tb$Date2,y=tb$WGS.Sequences,type='l',col=c("red"))
 
 axis.Date(side = 1, tb$Date2, format = "%Y")
 labels <- sapply(log10(aty),function(i)
@@ -30,10 +30,11 @@ grid(lty=1)
 legend("bottomright",c("GenBank","WGS"),pch=21,pt.bg="white",lty=1,col=c("blue","red"))
 dev.off()
 
+
+########## SRA Figure
 sra <- read.table("sra_stat.csv",header=T,as.is=T,sep=",")
 sra$date2 <- as.Date(sra$date,"%m/%d/%Y")
 
-########## SRA Figure
 pdf("SRA.data.pdf",width=6,height=5,pointsize=10)
 
 plot(x=sra$date2,y=sra$bases,log="y", type='l', col=c("blue"), yaxt="n",xaxt = "n",ylab="",xlab="Year", main= "Growth of Sequence Read Archive over time")
