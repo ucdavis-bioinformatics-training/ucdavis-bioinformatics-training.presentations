@@ -56,7 +56,7 @@ gold <- read.table("goldData.txt",sep="\t",header=T,as.is=T, quote="",comment.ch
 
 
 ##### Sequencing Costs
-costs <- read.table("Sequencing_Cost_Data_Table_Aug2019.txt",sep="\t",header=T,as.is=T)
+costs <- read.table("Sequencin_Cost_Data_Table_May2020.txt",sep="\t",header=T,as.is=T)
 
 costs$Date2 = as.Date(paste("1-",tolower(costs$Date),sep=""),"%d-%b-%y")
 
